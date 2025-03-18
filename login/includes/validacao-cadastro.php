@@ -61,7 +61,7 @@
 
         echo '<script">
                 alert("Usuário Cadastrado com Sucesso!!!");
-                window.location.replace("lista.php");
+                window.location.replace("index.php");
             </script>';
         exit();
     }

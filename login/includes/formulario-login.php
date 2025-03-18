@@ -1,6 +1,6 @@
 <section class="card dflex justify-content-center align-items-center p-5">
     <h1>Login</h1>
-    <form action="auxLogin.php" method="POST" class="mt-3">
+    <form action="./includes/validacao-login.php" method="POST" class="mt-3">
         <label for="" class="form-label">Usuário:</label>
         <input type="text" name="user" class="form-control mb-3" placeholder="Usuário" required>
 
@@ -11,7 +11,6 @@
                 <i id="icon-eye" class="bi bi-eye"></i>
             </button>
         </div>
-        
         
         <div class="d-flex justify-content-center gap-3 p-3">
             <a href="esqueciMinhaSenha.php" class="">Esqueci minha senha</a>
