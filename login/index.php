@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -43,4 +43,10 @@
         </form>
     </section>
 </body>
-</html>
+</html> -->
+
+<?php
+    include_once('includes/header.php');
+    include_once('includes/formulario-login.php');
+    include_once('includes/footer.php');
+?>
