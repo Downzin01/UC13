@@ -33,8 +33,8 @@
             <input type="password" name="password" class="form-control" placeholder="Senha">
             
             <div class="d-flex justify-content-center gap-3 p-3">
-                <a href="formulario.php" class="">Esqueci minha senha</a>
-                <a href="formulario.php" class="">Cadastrar Novo Usuário</a>
+                <a href="esqueciMinhaSenha.php" class="">Esqueci minha senha</a>
+                <a href="cadastrarUsuario.php" class="">Cadastrar Novo Usuário</a>
             </div>
             
             <div class="d-flex justify-content-center">

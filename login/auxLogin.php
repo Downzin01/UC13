@@ -11,14 +11,15 @@ $password = '';
 
 $banco = new PDO($dsn, $user, $password);
 
-$consultaUsuarioSenha = 'SELECT * FROM tb_usuario WHERE usuario = "' . $userForm . '" AND senha = "' . $passwordForm . '"';
+// Busca o usuário pelo nome de usuário
+$consultaUsuarioSenha = 'SELECT * FROM tb_usuario WHERE usuario = ?';
+$stmt = $banco->prepare($consultaUsuarioSenha);
+$stmt->execute([$userForm]);
+$resultado = $stmt->fetch();
 
-$resultado = $banco->query($consultaUsuarioSenha)->fetch();
-
-var_dump($resultado);
-
-if (!empty($resultado) && $resultado != false) {
-    header('location:loginSucesso.php');
+if ($resultado && password_verify($passwordForm, $resultado['senha'])) {
+    header('Location: loginSucesso.php');
 } else {
-    header('location:index.php');
+    header('Location: index.php');
 }
+?>

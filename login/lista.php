@@ -19,9 +19,6 @@
 
 <main class="container my-5">
     <table class="table table-striped">
-        <div class="my-3 d-flex justify-content-end">
-            <a href="formulario.php" class="btn btn-success">Cadastrar Novo Usuário</a>
-        </div>
         <tr>
             <td>ID</td>
             <td>Usuário</td>
@@ -33,8 +30,8 @@
                 <td> <?php echo $linha['usuario'] ?> </td>
                 <td class="text-center">
                     <a href="./ficha.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-primary">Abrir</a>
-                    <a href="./formulario-editar.php?id_aluno_alterar=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                    <a href="./aluno-deletar.php?id=<?= $linha['id'] ?>" class="btn btn-danger">Excluir</a>
+                    <a href="./editarFicha.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
+                    <a href="./excluirFicha.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-danger">Excluir</a>
                 </td>
             </tr>
         <?php } ?>
