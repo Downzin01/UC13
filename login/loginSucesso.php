@@ -1,5 +1,5 @@
 <?php
-$redirectTime = 3; // Tempo em segundos
+$redirectTime = 3; 
 $redirectURL = "./page_lista.php";
 ?>
 

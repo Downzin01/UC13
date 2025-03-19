@@ -55,7 +55,7 @@
         $bancoPreparado = $banco->prepare($insertUsuario);
         $bancoPreparado->execute([
             ':user' => $user,
-            ':senha' => password_hash($senha, PASSWORD_DEFAULT),  // Hash da senha
+            ':senha' => $senha,  
             ':id_pessoa' => $id_pessoa
         ]);
 

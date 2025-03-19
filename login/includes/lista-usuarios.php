@@ -10,23 +10,24 @@
     $resultado = $banco->query($select)->fetchAll();
 ?>
 
-<main class="container my-5">
+
+<section class="container d-flex justify-content-space-between my-5">
     <table class="table table-striped">
         <tr>
             <td>ID</td>
             <td>Usuário</td>
-            <td class="text-center">Ações</td>
+            <td class="text-center col-3">Ações</td>
         </tr>
         <?php foreach ($resultado as $linha) { ?>
             <tr>
                 <td> <?= $linha['id'] ?> </td>
                 <td> <?php echo $linha['usuario'] ?> </td>
                 <td class="text-center">
-                    <a href="./ficha.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-primary">Abrir</a>
-                    <a href="./editarFicha.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                    <a href="./excluirFicha.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-danger">Excluir</a>
+                    <a href="./page_ficha.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-primary">Abrir</a>
+                    <a href="./page_editarUsuario.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
+                    <a href="./includes/excluirUsuario.php?id_usuario=<?= $linha['id'] ?>" class="btn btn-danger">Excluir</a>
                 </td>
             </tr>
         <?php } ?>
     </table>
-</main>
+</section>

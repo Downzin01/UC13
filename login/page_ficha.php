@@ -36,6 +36,8 @@ $dados = $banco->query($select)->fetch();
 </style>
 <main class="container ">
     <form action="#">
+        
+
         <label for="nome">Nome</label>
         <input type="text" value="<?= $dados['nome'] ?>" disabled class="form-control">
 
@@ -80,6 +82,12 @@ $dados = $banco->query($select)->fetch();
             <div class="col">
                 <label for="data_nascimento">Cidade</label>
                 <input type="text" value="<?php echo $dados['cidade'] ?>" disabled class="form-control">
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+                <a href="page_lista.php" class="btn btn-primary">Voltar</a>
+                <a href="page_editarUsuario.php?id_usuario=<?= $id_usuario ?>" class="btn btn-warning ms-3">Editar</a>
+                <a href="./includes/excluirUsuario.php?id_usuario=<?= $id_usuario ?>" class="btn btn-danger ms-3">Excluir</a>
             </div>
         </div>
     </form>

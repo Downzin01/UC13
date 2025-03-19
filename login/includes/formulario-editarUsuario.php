@@ -1,43 +1,66 @@
 <?php
-$id_usuario = $_GET['id_usuario'];
+    $id_usuario = $_GET['id_usuario'];
 
-$dsn = 'mysql:dbname=db_login;host=127.0.0.1';
-$user = 'root';
-$password = '';
+    $dsn = 'mysql:dbname=db_login;host=127.0.0.1';
+    $user = 'root';
+    $password = '';
 
-$banco = new PDO($dsn, $user, $password);
+    $banco = new PDO($dsn, $user, $password);
 
-$select = 'SELECT tb_pessoa.*, tb_usuario.usuario, tb_usuario.senha FROM tb_pessoa INNER JOIN tb_usuario ON tb_usuario.id_pessoa = tb_pessoa.id WHERE tb_pessoa.id = ' . $id_usuario;
+    $select = 'SELECT tb_pessoa.*, tb_usuario.usuario, tb_usuario.senha FROM tb_pessoa INNER JOIN tb_usuario ON tb_usuario.id_pessoa = tb_pessoa.id WHERE tb_pessoa.id = ' . $id_usuario;
 
-$dados = $banco->query($select)->fetch();
+    $dados = $banco->query($select)->fetch();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Se a senha foi modificada pelo usuário
-    $senha = ($_POST['senha'] !== '') ? password_hash($_POST['senha'], PASSWORD_DEFAULT) : $dados['senha']; // Se a senha for em branco, mantém a original
-    $telefone_1 = $_POST['telefone_1'];
-    $telefone_2 = $_POST['telefone_2'];
-    $logradouro = $_POST['logradouro'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_POST['id'];
+        $user = $_POST['usuario'];
+        $pass = $_POST ['senha'];
+
+    $update = 'UPDATE tb_usuario SET usuario = :user, senha = :pass WHERE id_pessoa = :id';
+
+    $box = $banco->prepare($update);
+
+    $box->execute([ 
+        ':id' => $id,
+        ':user' => $user,
+        ':pass' => $pass,
+    ]);
+
+
+    $nome = $_POST['nome'];
+    $nasc = $_POST['ano_nascimento'];
+    $cpf = $_POST['cpf'];
+    $tel1 = $_POST['telefone_1'];
+    $tel2 = $_POST['telefone_2'];
+    $lograd = $_POST['logradouro'];
     $n_casa = $_POST['n_casa'];
     $bairro = $_POST['bairro'];
     $cidade = $_POST['cidade'];
 
-    // Atualizar a pessoa
-    $updatePessoa = "UPDATE tb_pessoa SET telefone_1 = ?, telefone_2 = ?, logradouro = ?, n_casa = ?, bairro = ?, cidade = ? WHERE id = ?";
-    $stmtPessoa = $banco->prepare($updatePessoa);
-    $stmtPessoa->execute([$telefone_1, $telefone_2, $logradouro, $n_casa, $bairro, $cidade, $id_usuario]);
+    $update = 'UPDATE tb_pessoa SET nome = :nome, ano_nascimento = :ano_nascimento, cpf = :cpf, telefone_1 = :telefone_1, telefone_2 = :telefone_2, logradouro = :logradouro, n_casa = :n_casa, bairro = :bairro, cidade = :cidade WHERE id = :id' ;
 
-    // Atualizar o usuário (senha)
-    $updateUsuario = "UPDATE tb_usuario SET senha = ? WHERE id_pessoa = ?";
-    $stmtUsuario = $banco->prepare($updateUsuario);
-    $stmtUsuario->execute([$senha, $id_usuario]);
+    $box = $banco->prepare($update);
+
+    $box->execute([ 
+        ':id' => $id,
+        ':nome' => $nome,
+        ':ano_nascimento' => $nasc,
+        ':cpf' => $cpf,
+        ':telefone_1' => $tel1,
+        ':telefone_2' => $tel2,
+        ':logradouro' => $lograd,
+        ':n_casa' => $n_casa,
+        ':bairro' => $bairro,
+        ':cidade' => $cidade,
+        
+    ]);
 
     // Redirecionar após salvar
-    header("Location: visualizar.php?id_usuario=$id_usuario");
+    header("Location: ficha.php?id_usuario=$id_usuario");
     exit();
 }
 ?>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
     main {
         display: flex;
@@ -55,14 +78,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         background-color: #f8f9fa;
     }
 </style>
-
 <main class="container">
-    <form action="" method="POST">
+    <form action="validacao-editarUsuario.php" method="POST">
+        <input type="hidden" value="<?php echo $id_alunos ?>" name="id">
         <!-- Nome do Usuário - Somente leitura -->
         <div class="row mt-2">
             <div class="col position-relative">
                 <label for="usuario">Nome de Usuário</label>
-                <input type="text" id="usuario" value="<?= $dados['usuario'] ?>" class="form-control" disabled>
+                <input type="text" name="nome" id="usuario" value="<?= $dados['usuario'] ?>" class="form-control" disabled>
             </div>
         </div>
 
@@ -114,27 +137,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="cidade" value="<?= $dados['cidade'] ?>" class="form-control">
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary mt-3">Salvar</button>
+        <div class="d-flex justify-content-center mt-3 gap-3">
+            <a href="page_lista.php" class="btn btn-primary">Voltar</a>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
     </form>
 </main>
-
-<script>
-    function toggleSenha() {
-        var senhaInput = document.getElementById("senha");
-        var icon = document.getElementById("icon-eye");
-        
-        if (senhaInput.type === "password") {
-            senhaInput.type = "text";
-            icon.classList.remove("bi-eye");
-            icon.classList.add("bi-eye-slash");
-        } else {
-            senhaInput.type = "password";
-            icon.classList.remove("bi-eye-slash");
-            icon.classList.add("bi-eye");
-        }
-    }
-</script>
-
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
