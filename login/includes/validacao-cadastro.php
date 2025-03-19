@@ -59,11 +59,7 @@
             ':id_pessoa' => $id_pessoa
         ]);
 
-        echo '<script">
-                alert("Usuário Cadastrado com Sucesso!!!");
-                window.location.replace("index.php");
-            </script>';
-        exit();
+        header("Location: index.php");
     }
 ?>
 

@@ -52,8 +52,8 @@ try {
     <div class="container text-center mt-5">
         <h2 class="text-danger">Deseja excluir este usuário?</h2>
         <div class="mt-4">
-            <a href="deletar.php?confirmar=true&id_usuario=<?= $_GET['id_usuario'] ?>" class="btn btn-danger">Sim, excluir</a>
-            <a href="page_lista.php" class="btn btn-secondary">Cancelar</a>
+            <a href="./excluirUsuario.php?confirmar=true&id_usuario=<?= $_GET['id_usuario'] ?>" class="btn btn-danger">Sim, excluir</a>
+            <a href="../page_lista.php" class="btn btn-secondary">Cancelar</a>
         </div>
     </div>
 
@@ -69,7 +69,7 @@ try {
                     Usuário excluído com sucesso!
                 </div>
                 <div class="modal-footer">
-                    <a href="page_lista.php" class="btn btn-success">OK</a>
+                    <a href="../page_lista.php" class="btn btn-success">OK</a>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@ try {
                     <span id="errorMessage"></span>
                 </div>
                 <div class="modal-footer">
-                    <a href="page_lista.php" class="btn btn-danger">Voltar</a>
+                    <a href="../page_lista.php" class="btn btn-danger">Voltar</a>
                 </div>
             </div>
         </div>
